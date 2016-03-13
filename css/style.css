@@ -199,7 +199,16 @@ label          {
   -moz-animation:inputHighlighter 0.3s ease;
   animation:inputHighlighter 0.3s ease;
 }
-
+/*input type*/ 
+/*input[type="file"]{
+  display: none;
+}*/
+.file{
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
   from { background:#5264AE; }
