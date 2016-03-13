@@ -13,5 +13,8 @@
 
             $auth = Auth::register($email, $password);
 		}
+        public function logout() {
+            $auth = Auth::logout();
+        }
 	}
  ?>

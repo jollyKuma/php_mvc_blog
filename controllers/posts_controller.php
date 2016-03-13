@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	class PostsController{
 		public function index(){
@@ -15,18 +15,17 @@
 		public function addPosts(){
 			$posts = Post::all();
 			require_once('views/posts/addPosts.php');
+		}
+		public function add() {
+			$filetmp = $_FILES["toProcess"]["tmp_name"];
+		    $filename = $_FILES["toProcess"]["name"];
+		    $filetype = $_FILES["toProcess"]["type"]; // $filepath = "uploads/".$filename;
+			$filepath = "uploads/";
+			$title = $_POST['title'];
+			$content = $_POST['content'];
 
-			if(isset($_POST['submit'])){
-				if (!empty($_POST['author']) && !empty($_POST['content'])) {
-					$posts = POST::add();
-					echo "Successfully added!";
-				}
-				else
-				{
-					echo "Field cannot be empty";
-				}
-			
-			}
+			$posts = Post::add($filetmp, $filename, $filetype, $filepath, $title, $content);
+
 		}
 	}
  ?>

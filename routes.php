@@ -14,7 +14,7 @@
 				break;
 			case 'posts':
 				//we need the model to query the database later in  the controller
-                session_destroy();
+                // session_destroy();
 				if (empty($_SESSION['email']) && empty($_SESSION['user_id'])) {
 					header('Location: '. "?controller=pages&action=login");
 				}
@@ -31,8 +31,8 @@
 	//adding an entry for he new controller and its actions
 	$controllers = array(
 		                'pages' =>['home' ,'error','login','register' ],
-						'posts' => ['index','show','addPosts'],
-						'auth' => ['login','register']
+						'posts' => ['index','show','addPosts', 'add'],
+						'auth' => ['login','register','logout']
 					);
 
 	//check that the requested controller and action are both allowed

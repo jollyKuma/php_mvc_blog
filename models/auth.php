@@ -32,13 +32,7 @@ class Auth{
 
                     echo $_SESSION['email'];
                     echo $_SESSION['user_id'];
-                    // $uri_array = explode("/", $_SERVER['REQUEST_URI']);
-                    // $uri_link = [];
-                    // for ($i=0; $i < sizeof($uri_array) - 1; $i++) {
-                    //     array_push($uri_link, $uri_array[$i]);
-                    // }
-                    // $link_redirect = implode("/",$uri_link) . "/index.php";
-                    // header('Location: '.$link_redirect);
+
 					header('Location: '. "?controller=posts&action=index");
                 }
                 else
@@ -58,5 +52,9 @@ class Auth{
 		header('Location: '. "?controller=pages&action=login");
 	}
 
+	public static function logout() {
+		session_destroy();
+		header('Location: '. "?controller=pages&action=login");
+	}
 }
  ?>

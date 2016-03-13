@@ -8,14 +8,12 @@ class Post{
 	public $image_name;
 	public $created;
 
-	public function __construct($id, $user_id, $content, $title, $image, $image_name, $created){
-		$this->id = $id;
+	public function __construct($id, $user_id, $title, $filepath, $filetype, $filename, $content, $created){
 		$this->user_id = $user_id;
-		$this->content= $content;
 		$this->title= $title;
-		$this->image_name= $image_name;
-		$this->image= $image;
-		$this->created= $created;
+		$this->filepath= $filepath;
+		$this->filetype= $filetype;
+		$this->filename= $filename;
 		$this->content= $content;
 	}
 	public static function all(){
@@ -24,7 +22,8 @@ class Post{
 		$req = $db->query('SELECT * FROM posts');
 
 		foreach ($req -> fetchAll() as $post) {
-			$list[] = new Post($post['id'],$post['user_id'], $post['content'], $post['title'], $post['image'],$post['image_name'],$post['created']);
+			echo "\n";
+			$list[] = new Post($post['id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']);
 		}
 		return $list;
 	}
@@ -39,13 +38,30 @@ class Post{
 		$req->execute(array('id' => $id));
 		$post = $req->fetch();
 
-		return new Post($post['id'],$post['user_id'], $post['content'], $post['title'], $post['image'],$post['image_name'],$post['created']);
+		return new Post($post['id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']);
 	}
 	//add
-	public static function add(){
+	public static function add($filetmp, $filename, $filetype, $filepath, $title, $content){
 		$db = Db::getInstance();
-		$content = $_POST['content'];
-		$req = $db -> query("INSERT INTO posts(content) VALUES('$content')");
+
+		$user_id = $_SESSION['user_id'];
+		$temp_image_name = explode(".", $filename);
+
+		$mydate=getdate(date("U"));
+		$created_date="$mydate[weekday], $mydate[month] $mydate[mday], $mydate[year]";
+
+		$imagename = time() . $_SESSION['email'] . "." . $temp_image_name[1];
+
+		$newPath = $filepath . $imagename;
+
+		if (is_uploaded_file($filetmp)) {
+	        move_uploaded_file($filetmp, $newPath);
+	        $query = $db->query("INSERT INTO posts(user_id, title, image_path, image_type, image_name, content, created)
+	            VALUES('$user_id', '$title', '$newPath', '$filetype','$imagename', '$content', '$created_date')");
+
+	        header('Location: '. "?controller=posts&action=index");
+	    }
+
 
 	}
 }
