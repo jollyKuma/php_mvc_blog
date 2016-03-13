@@ -4,7 +4,12 @@ html{
   background-color: #f1f1f1;
   font-family: "Roboto";
 }
-
+/*Form wrapper*/
+.form_wrapper{
+   max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
 /* BOX LOGIN */
 .box{
   position: relative;
@@ -204,10 +209,17 @@ label          {
   display: none;
 }*/
 .file{
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+   display: inline-block;
+  width: 20%;
+  padding: 50px 0 0 0;
+  height: 30px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url('../img/cam.png') center center no-repeat #e4e4e4;
+  border-radius: 20px;
+  background-size: 50px 50px;
 }
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
