@@ -55,6 +55,7 @@ class Auth{
 	public static function register($email, $password){
         $db = Db::getInstance();
         $query = $db->query("INSERT INTO users(email, password) VALUES('$email', '$password')");
+		header('Location: '. "?controller=pages&action=login");
 	}
 
 }
