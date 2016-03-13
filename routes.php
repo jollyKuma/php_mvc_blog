@@ -31,7 +31,7 @@
 	//adding an entry for he new controller and its actions
 	$controllers = array(
 		                'pages' =>['home' ,'error','login','register' ],
-						'posts' => ['index','show','addPosts', 'add'],
+						'posts' => ['index','show','addPosts', 'add', 'delete', 'edit'],
 						'auth' => ['login','register','logout']
 					);
 

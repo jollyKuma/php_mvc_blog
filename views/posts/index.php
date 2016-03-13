@@ -18,8 +18,8 @@
 						  <?php
 
 							if ($user_id == $post->user_id) {
-								echo "<a href='?controller=posts&action=show&id=.$post->id.' type='button' class='btn btn-danger pull-right'>Delete</a>";
-								echo "<a href='?controller=posts&action=show&id=.$post->id.' type='button' class='btn btn-default pull-right'>Edit</a>";
+								echo "<a href='?controller=posts&action=delete&id=$post->post_id' type='button' class='btn btn-danger pull-right'>Delete</a>";
+								echo "<a href='?controller=posts&action=show&id=$post->post_id' type='button' class='btn btn-default pull-right'>Edit</a>";
 							}
 
 						   ?>

@@ -8,22 +8,24 @@ class Post{
 	public $image_name;
 	public $created;
 
-	public function __construct($id, $user_id, $title, $filepath, $filetype, $filename, $content, $created){
+	public function __construct($post_id, $post_id, $user_id, $title, $filepath, $filetype, $filename, $content, $created){
+		$this->post_id = $post_id;
+		$this->post_id = $post_id;
 		$this->user_id = $user_id;
 		$this->title= $title;
 		$this->filepath= $filepath;
 		$this->filetype= $filetype;
 		$this->filename= $filename;
 		$this->content= $content;
+		$this->created= $created;
 	}
 	public static function all(){
 		$list = [];
 		$db = Db::getInstance();
 		$req = $db->query('SELECT * FROM posts');
-
+		$list = [];
 		foreach ($req -> fetchAll() as $post) {
-			echo "\n";
-			$list[] = new Post($post['id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']);
+			array_push($list, new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']));
 		}
 		return $list;
 	}
@@ -33,12 +35,12 @@ class Post{
 
 		$id = intval($id);
 
-		$req = $db -> prepare('SELECT * FROM posts WHERE id = :id');
+		$req = $db -> prepare('SELECT * FROM posts WHERE post_id = :id');
 
 		$req->execute(array('id' => $id));
 		$post = $req->fetch();
 
-		return new Post($post['id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']);
+		return new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']);
 	}
 	//add
 	public static function add($filetmp, $filename, $filetype, $filepath, $title, $content){
@@ -61,8 +63,19 @@ class Post{
 
 	        header('Location: '. "?controller=posts&action=index");
 	    }
+	}
 
+	public static function delete($id) {
+		$db = Db::getInstance();
+		$query = $db->query("DELETE FROM posts WHERE post_id='$id'");
+		header('Location: '. "?controller=posts&action=index");
+	}
 
+	public static function edit($title, $content, $id){
+		$db = Db::getInstance();
+
+		$query = $db->query("UPDATE posts SET title='$title', content='$content' WHERE post_id='$id'");
+		header('Location: '. "?controller=posts&action=index");
 	}
 }
  ?>

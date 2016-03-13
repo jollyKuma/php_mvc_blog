@@ -27,5 +27,23 @@
 			$posts = Post::add($filetmp, $filename, $filetype, $filepath, $title, $content);
 
 		}
+
+		public function edit() {
+			$title = $_POST['title'];
+			$content = $_POST['content'];
+			$id = $_POST['id'];
+
+			echo $id;
+			echo $title;
+			echo $content;
+
+			$posts = Post::edit($title, $content, $id);
+		}
+
+		public function delete() {
+			$post_id = $_GET['id'];
+
+			$posts = Post::delete($post_id);
+		}
 	}
  ?>
