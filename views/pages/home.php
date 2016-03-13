@@ -1,3 +1,3 @@
 
 
-<p>You successfully landed the home page. congrats! </p>
+<p><?php echo $message ?></p>

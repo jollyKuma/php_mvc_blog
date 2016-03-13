@@ -1,6 +1,7 @@
-<?php 
+<?php
 	class PagesController {
 		public function home(){
+			$message = "Home Page";
 			require_once('views/pages/home.php');
 		}
 		public function error(){

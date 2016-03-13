@@ -1,4 +1,4 @@
-<?php 
+<?php
 	function call($controller, $action){
 		//require the file that matches the controller name
 		require_once('controllers/' . $controller . '_controller.php');
@@ -7,11 +7,11 @@
 			case 'pages':
 				$controller = new PagesController();
 				break;
-				case 'posts':
-				//we need the model to query the database later in  the controller 
+			case 'posts':
+				//we need the model to query the database later in  the controller
 				require_once('models/post.php');
 				$controller = new PostsController();
-				break;
+			break;
 		}
 		//call the action
 		$controller -> { $action }();

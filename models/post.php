@@ -1,12 +1,21 @@
-<?php 
+<?php
 class Post{
 	public $id;
-	public $author;
+	public $user_id;
 	public $content;
+	public $title;
+	public $image;
+	public $image_name;
+	public $created;
 
-	public function __construct($id, $author, $content){
-		$this->id 	  = $id;
-		$this->author = $author;
+	public function __construct($id, $user_id, $content, $title, $image, $image_name, $created){
+		$this->id = $id;
+		$this->user_id = $user_id;
+		$this->content= $content;
+		$this->title= $title;
+		$this->image_name= $image_name;
+		$this->image= $image;
+		$this->created= $created;
 		$this->content= $content;
 	}
 	public static function all(){
@@ -15,7 +24,7 @@ class Post{
 		$req = $db->query('SELECT * FROM posts');
 
 		foreach ($req -> fetchAll() as $post) {
-			$list[] = new Post($post['id'], $post['title'], $post['content']);
+			$list[] = new Post($post['id'],$post['user_id'], $post['content'], $post['title'], $post['image'],$post['image_name'],$post['created']);
 		}
 		return $list;
 	}
@@ -30,15 +39,14 @@ class Post{
 		$req->execute(array('id' => $id));
 		$post = $req->fetch();
 
-		return new Post($post['id'], $post['author'], $post['content']);
+		return new Post($post['id'],$post['user_id'], $post['content'], $post['title'], $post['image'],$post['image_name'],$post['created']);
 	}
 	//add
 	public static function add(){
 		$db = Db::getInstance();
-		$author = $_POST['author'];
 		$content = $_POST['content'];
-		$req = $db -> query("INSERT INTO posts(author,content) VALUES('$author','$content')");
-		
+		$req = $db -> query("INSERT INTO posts(content) VALUES('$content')");
+
 	}
 }
  ?>
