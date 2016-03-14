@@ -8,11 +8,19 @@
  					  <div class="panel-body">
 
                         <?php
+                         $user_id = $_GET['id'];
+                          echo "<a href='?controller=auth&action=deleteUser&id=$user_id' type='button' class='btn btn-danger pull-right'>Delete Account</a>";
+                         ?>
+
+                        <?php
+
+                        $user_id = $_GET['id'];
 
                         echo "<h1>Edit</h1>" . "<br>";
-                        echo "<form action=\"?controller=auth&action=editUser\" method=\"POST\">";
-                        echo " <input type='hidden' class='form-control' name='id' value='". $auth->id ."'>";
-                        echo " Password<input type='password' class='form-control' name='password' value='". $auth->password."' required>" . "<br>";
+                        echo "<form action=\"?controller=auth&action=submitEditUser\" method=\"POST\">";
+                        echo " <input type='hidden' class='form-control' name='user_id' value='". $user_id ."'>";
+                        echo " Email<input type='text' value='" . $_SESSION['email'] . "' disabled='true' class='form-control' >" . "<br>";
+                        echo " Password<input type='password' class='form-control' name='password' required>" . "<br>";
                         echo " <input type='submit' class='btn btn-success' onclick='return alert(\"Update Successful\")' value='Update' /> ";
                         echo "</form>";
 

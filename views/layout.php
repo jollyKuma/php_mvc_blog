@@ -12,5 +12,6 @@
   <?php require_once('routes.php'); ?>
   <script  src="bootstrap/js/jquery.min.js"></script>
   <script  src="bootstrap/js/bootstrap.js"></script>
+
 </body>
 </html>

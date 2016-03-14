@@ -8,7 +8,7 @@ class Post{
 	public $image_name;
 	public $created;
 
-	public function __construct($post_id, $post_id, $user_id, $title, $filepath, $filetype, $filename, $content, $created){
+	public function __construct($post_id, $post_id, $user_id, $title, $filepath, $filetype, $filename, $content, $created, $email){
 		$this->post_id = $post_id;
 		$this->post_id = $post_id;
 		$this->user_id = $user_id;
@@ -18,6 +18,7 @@ class Post{
 		$this->filename= $filename;
 		$this->content= $content;
 		$this->created= $created;
+		$this->email= $email;
 	}
 	public static function all(){
 		$list = [];
@@ -25,7 +26,15 @@ class Post{
 		$req = $db->query('SELECT * FROM posts');
 		$list = [];
 		foreach ($req -> fetchAll() as $post) {
-			array_push($list, new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']));
+
+			$id = intval($post['user_id']);
+
+			$req = $db -> prepare('SELECT * FROM users WHERE user_id = :id');
+
+			$req->execute(array('id' => $id));
+			$user = $req->fetch();
+
+			array_push($list, new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created'], $user['email']));
 		}
 		return $list;
 	}
@@ -40,7 +49,14 @@ class Post{
 		$req->execute(array('id' => $id));
 		$post = $req->fetch();
 
-		return new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created']);
+		$userid = intval($post['user_id']);
+
+		$requser = $db -> prepare('SELECT * FROM users WHERE user_id = :id');
+
+		$requser->execute(array('id' => $userid));
+		$user = $req->fetch();
+
+		return new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created'], $user['email']);
 	}
 	//add
 	public static function add($filetmp, $filename, $filetype, $filepath, $title, $content){
@@ -76,6 +92,29 @@ class Post{
 
 		$query = $db->query("UPDATE posts SET title='$title', content='$content' WHERE post_id='$id'");
 		header('Location: '. "?controller=posts&action=index");
+	}
+
+	public static function search($search_value) {
+		$db = Db::getInstance();
+
+		$query = $db->query("SELECT user_id FROM users WHERE email LIKE '%".$search_value."%'");
+		$user = $query->fetch();
+		$user_id = $user['user_id'];
+
+		$reqpost = $db->query("SELECT * FROM posts WHERE user_id='$user_id'");
+		$list = [];
+		foreach ($reqpost -> fetchAll() as $post) {
+			$id = intval($post['user_id']);
+
+			$req = $db -> prepare('SELECT * FROM users WHERE user_id = :id');
+
+			$req->execute(array('id' => $id));
+			$user = $req->fetch();
+
+			array_push($list, new Post($post['post_id'], $post['post_id'], $post['user_id'], $post['title'],$post['image_path'],$post['image_type'],$post['image_name'], $post['content'], $post['created'], $user['email']));
+		}
+		return $list;
+
 	}
 }
  ?>

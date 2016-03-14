@@ -32,7 +32,7 @@
 	$controllers = array(
 		                'pages' =>['home' ,'error','login','register'],
 						'posts' => ['index','show','addPosts', 'add', 'delete', 'edit','search'],
-						'auth' => ['login','register','logout','editUser']
+						'auth' => ['login','register','logout','editUser', 'submitEditUser', 'deleteUser']
 					);
 
 	//check that the requested controller and action are both allowed

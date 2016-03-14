@@ -36,13 +36,13 @@ class Auth{
 					header('Location: '. "?controller=posts&action=index");
                 }
                 else
-                    echo "Incorrent Password";
+                    header('Location: '. "?controller=posts&action=index");
             }
             else
-                die("User doesn't exist");
+                header('Location: '. "?controller=posts&action=index");
         }
         else
-            die("Please enter a username and a password");
+            header('Location: '. "?controller=posts&action=index");
 
 	}
 
@@ -56,9 +56,18 @@ class Auth{
 		session_destroy();
 		header('Location: '. "?controller=pages&action=login");
 	}
-    public static function editUser($password,$id){
+
+	public static function submitEditUser($user_id, $password) {
 		$db = Db::getInstance();
-		$query = $db->query("UPDATE users SET password='$password' WHERE user_id='$id'");
+		$query = $db->query("UPDATE users SET password='$password' WHERE user_id='$user_id'");
+		header('Location: '. "?controller=posts&action=index");
+	}
+
+	public static function deleteUser($user_id) {
+		$db = Db::getInstance();
+		$query = $db->query("DELETE FROM users WHERE user_id='$user_id'");
+		session_destroy();
+		header('Location: '. "?controller=pages&action=login");
 	}
 }
  ?>

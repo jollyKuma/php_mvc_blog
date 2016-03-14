@@ -14,16 +14,21 @@
      </ul>
      <ul class="nav navbar-nav navbar-right">
         <li>
-        <form class="navbar-form navbar-left" role="search">
+        <form action="?controller=posts&action=search" method="POST" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control inputMaterial" href=""  id="search"placeholder="Search">
+          <input type="text" class="form-control inputMaterial" name="search"  id="search"placeholder="Search">
             <span class="highlight" style="width:240px"></span>
              <span class="bar" style="width:250px"></span>
         </div>
         <button type="submit" class="btn btn-primary">Go</button>
       </form>
         </li>
-       <li><a href="?controller=auth&action=editUser"><?php echo $_SESSION['email'] ?></a></li>
+       <li>
+
+           <?php
+                echo "<a href='?controller=auth&action=editUser&id=".$_SESSION['user_id']."'>" . $_SESSION['email'] . "</a>";
+            ?>
+       </li>
        <li><a href="?controller=auth&action=logout">Logout</a></li>
      </ul>
    </div><!--/.nav-collapse -->
