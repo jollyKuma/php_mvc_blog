@@ -2,7 +2,7 @@
 	require 'topbar.php';
  ?>
 
- <div class="container">
+ <div class="container" style="width: 960px; margin: 0 auto;">
  	<h3>Edit Post: </h3>
  		<p>
  			<div class="row posts">

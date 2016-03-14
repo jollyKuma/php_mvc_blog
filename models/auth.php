@@ -56,5 +56,9 @@ class Auth{
 		session_destroy();
 		header('Location: '. "?controller=pages&action=login");
 	}
+    public static function editUser($password,$id){
+		$db = Db::getInstance();
+		$query = $db->query("UPDATE users SET password='$password' WHERE user_id='$id'");
+	}
 }
  ?>

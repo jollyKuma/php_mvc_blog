@@ -1,6 +1,6 @@
-<div class="box" style="height:510px;">
+<div class="box">
   <div id="header">
-    <div id="cont-lock"><i class="fa fa-lock lock"></i></div>
+    <div id="cont-lock"><i class="fa fa-edit lock"></i></div>
     <div id="bottom-head"><h1 id="logintoregister">Register</h1></div>
   </div>
    <form action="?controller=auth&action=register" method="POST">
@@ -18,5 +18,5 @@
     </div>
     <button id="btn_register" type="submit">Register</button>
   </form>
-  <div id="footer-box"></div>
+  <div id="footer-box"><p class="footer-text">Already have an account?<a href="?controller=pages&action=login"><span class="sign-up"> Sign in</span></a></p></div>
 </div>

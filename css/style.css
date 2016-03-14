@@ -6,9 +6,13 @@ html{
 }
 /*Form wrapper*/
 .form_wrapper{
-   max-width: 800px;
+   max-width: 760px;
     margin: 0 auto;
     border: 1px solid #ccc;
+}
+.center{
+    max-width: 800px;
+    margin: 0 auto;
 }
 /* BOX LOGIN */
 .box{
@@ -129,6 +133,38 @@ html{
 }
 
 .box p{
+  font-size:14px;
+  text-align:center;
+}
+.btnPost button{
+  background: #cfd8dc;
+  border:0;
+  color: #009688;
+  padding:10px;
+  font-size: 16px;
+  font-weight: 300;
+  width:330px;
+  margin:20px auto;
+  display:block;
+  cursor:pointer;
+    -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  border-radius: 2px;
+}
+
+.btnPost button:active{
+  background: #009688;
+  color: #263238;
+}
+
+.btnPost button:hover{
+    background: #009688;
+  color: #FFF;
+    -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.btnPost p{
   font-size:14px;
   text-align:center;
 }

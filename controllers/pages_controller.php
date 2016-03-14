@@ -12,6 +12,6 @@
 		}
 		public function register(){
 			require_once('views/pages/register.php');
-		}
+		}        
 	}
  ?>

@@ -45,5 +45,12 @@
 
 			$posts = Post::delete($post_id);
 		}
+		public function find(){
+           
+			$search = $_POST['search'];
+             if(isset($_POST['submit'])){
+                 $post = POST::find($search);
+             }
+		}
 	}
  ?>
